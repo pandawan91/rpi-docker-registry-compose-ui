@@ -16,5 +16,5 @@ app.all("/", function(req, res){
 });
 
 app.listen("8080", function(){
-  console.log("service ready");
+  console.log("service ready !!");
 });
