@@ -1,0 +1,22 @@
+{
+  "name": "rpi-docker-registry-compose-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandawan91/rpi-docker-registry-compose-ui.git"
+  },
+  "author": "Vuong Ngo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pandawan91/rpi-docker-registry-compose-ui/issues"
+  },
+  "homepage": "https://github.com/pandawan91/rpi-docker-registry-compose-ui#readme",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
+}
