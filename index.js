@@ -4,7 +4,7 @@ var express = require('express'),
 app = express();
 
 app.all("/", function(req, res){
-  console.log(req);
+  console.log(req.body);
   res.send("hallo")
 });
 
