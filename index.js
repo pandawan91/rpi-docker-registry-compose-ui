@@ -12,6 +12,7 @@ app.use(bodyParser.json({ type: 'application/vnd.docker.distribution.events.v1+j
 
 app.all("/", function(req, res){
   console.log(req.body.events);
+  res.sendStatus(200);
 });
 
 app.listen("8080", function(){
