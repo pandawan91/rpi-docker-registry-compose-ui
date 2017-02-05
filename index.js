@@ -4,8 +4,7 @@ var express = require('express'),
 app = express();
 
 app.all("/", function(req, res){
-  console.log(req);
-  console.log(req.event);
+  console.log(req.events);
 });
 
 app.listen("8080", function(){
