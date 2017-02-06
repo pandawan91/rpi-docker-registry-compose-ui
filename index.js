@@ -10,6 +10,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/vnd.docker.distribution.events.v1+json'}));
 
+app.on('connection', function(socket){
+  console.log("Connected");
+  socket.setTimeout(10 * 1000); //10 sec timeout
+});
+
 app.all("/", function(req, res){
   console.log(req.body.events);
   console.log(res);
