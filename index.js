@@ -8,10 +8,11 @@ app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
-app.use(bodyParser.json({ type: 'application/json'}));
+app.use(bodyParser.json({ type: 'application/vnd.docker.distribution.events.v1+json'}));
 
 app.all("/", function(req, res){
   console.log(req.body.events);
+  console.log(res);
   res.send("OK");
 });
 
