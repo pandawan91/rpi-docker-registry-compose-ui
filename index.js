@@ -17,7 +17,6 @@ app.on('connection', function(socket){
 
 app.all("/", function(req, res){
   console.log(req.body.events);
-  console.log(res);
   res.send("OK");
 });
 
