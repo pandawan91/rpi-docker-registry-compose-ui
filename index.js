@@ -2,7 +2,6 @@
 
 var express = require('express'),
 bodyParser = require('body-parser'),
-mongoClient = require('mongodb').MongoClient,
 app = express();
 
 //parse application/json and look for raw text
