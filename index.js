@@ -2,7 +2,9 @@
 
 var express = require('express'),
 bodyParser = require('body-parser'),
-app = express();
+mongoClient = require('mongodb').MongoClient,
+app = express(),
+mongoDbUrl = "mongodb://registry:27017/"
 
 //parse application/json and look for raw text
 app.use(bodyParser.json());
@@ -16,5 +18,10 @@ app.all("/", function(req, res){
 });
 
 app.listen("8080", function(){
+  mongoClient.connect(mongoDbUrl, function(err, db){
+    if(err) throw err;
+    console.log("Connected to DB");
+    db.close();
+  });
   console.log("service ready !!");
 });
