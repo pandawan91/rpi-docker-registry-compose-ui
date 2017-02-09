@@ -56,6 +56,7 @@ exports.sendToDatabase = function(eventObj, context){
             TagId: tag.getDataValue("Id")
           }).then((target) => {
             event.setDataValue("TargetId", target.getDataValue("Id"));
+            event.save();
           });
         });
       });
