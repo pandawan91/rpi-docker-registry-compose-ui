@@ -2,8 +2,10 @@
 
 var express = require('express'),
   bodyParser = require('body-parser'),
-  context = require('./src/dal/context.js').create('mysql', 'root', 'toor'),
+  context = require('./src/dal/context.js')
+    .create('mysql', 'root', 'toor'),
   sequelize = require('sequelize'),
+  eventListener = require('./src/services/event-listener.js')
   app = express();
 
 //parse application/json and look for raw text
@@ -16,8 +18,8 @@ app.use(bodyParser.json({
   type: 'application/vnd.docker.distribution.events.v1+json'
 }));
 
-app.all("/", function(req, res) {
-  console.log(req.body.events);
+app.post("/", function(req, res) {
+  eventListener.sendToDatabase(req.body, context);
   res.send("OK");
 });
 
