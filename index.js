@@ -19,7 +19,8 @@ app.use(bodyParser.json({
 }));
 
 app.post("/", function(req, res) {
-  eventListener.sendToDatabase(req.body, context);
+  for(var index in req.body.events)
+    eventListener.sendToDatabase(req.body.events[index], context);
   res.send("OK");
 });
 
