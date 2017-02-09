@@ -24,11 +24,22 @@ create table Requests(
     primary key(Id)
 );
 
+create table Tags(
+	Id int not null auto_increment,
+    Name varchar(255),
+    
+    primary key(Id)
+);
+
 create table Repositories(
 	Id int not null auto_increment,
     Name varchar(255),
-
-    primary key(Id)
+    Description varchar(10000),
+    Note varchar(10000),
+	TagId int,
+    
+    primary key(Id),
+    foreign key(TagId) references Tags(Id)
 );
 
 create table Targets(
@@ -37,9 +48,10 @@ create table Targets(
     Digest varchar(255),
     RepositoryId int,
     Url varchar(255),
-    Tag varchar(50),
+    TagId int,
 
     primary key(Id),
+    foreign key(TagId) references Tags(Id),
     foreign key(RepositoryId) references Repositories(Id)
 );
 
