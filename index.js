@@ -24,6 +24,18 @@ app.post("/", function(req, res) {
   res.send("OK");
 });
 
+app.get("/", (req, res) => {
+  context.models.DockerEvents.findAll({
+    include: [
+      {model: context.models.Actors, required: true},
+      context.models.Actions,
+      // context.models.Repository
+    ]
+  }).then((events) => {
+    res.send(events);
+  });
+});
+
 app.listen("8080", function() {
   console.log("service ready !!");
 });

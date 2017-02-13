@@ -53,6 +53,24 @@ var setForeignKeys = function(contextModels) {
   contextModels.sources.hasMany(contextModels.dockerEvents, {
     foreignKey: "SourceId"
   });
+  contextModels.dockerEvents.belongsTo(contextModels.actions,{
+    foreignKey: "ActionId"
+  });
+  contextModels.dockerEvents.belongsTo(contextModels.actors,{
+    foreignKey: "ActorId"
+  });
+  contextModels.dockerEvents.belongsTo(contextModels.repositories,{
+    foreignKey: "RepositoryId"
+  });
+  contextModels.dockerEvents.belongsTo(contextModels.targets,{
+    foreignKey: "TargetId"
+  });
+  contextModels.dockerEvents.belongsTo(contextModels.requests,{
+    foreignKey: "RequestId"
+  });
+  contextModels.dockerEvents.belongsTo(contextModels.sources,{
+    foreignKey: "SourceId"
+  });
 
   contextModels.tags.hasMany(contextModels.targets, {
     foreignKey: "TagId"
@@ -60,8 +78,17 @@ var setForeignKeys = function(contextModels) {
   contextModels.repositories.hasMany(contextModels.targets, {
     foreignKey: "RepositoryId"
   });
+  contextModels.targets.belongsTo(contextModels.tags,{
+    foreignKey: "TagId"
+  });
+  contextModels.targets.belongsTo(contextModels.repositories,{
+    foreignKey: "RepositoryId"
+  });
 
   contextModels.tags.hasMany(contextModels.repositories,{
+    foreignKey: "TagId"
+  });
+  contextModels.repositories.belongsTo(contextModels.tags,{
     foreignKey: "TagId"
   });
 }
