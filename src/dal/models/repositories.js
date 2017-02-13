@@ -17,6 +17,9 @@ exports.create = function(context) {
     Note: {
       type: sequelize.STRING(10000)
     },
+    Active: {
+      type: sequelize.BOOLEAN
+    },
     TagId: {
       type: sequelize.INTEGER
     },

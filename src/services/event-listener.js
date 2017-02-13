@@ -4,7 +4,6 @@ exports.sendToDatabase = function(eventObj, context){
   if(eventObj === null) throw "eventObj is null";
   if(context === null) throw "context is null";
 
-  console.log(eventObj);
   context.models.DockerEvents
     .create({
       Stamp: eventObj["timestamp"]
@@ -20,7 +19,6 @@ exports.sendToDatabase = function(eventObj, context){
       context.models.Actors.findOne({
         where: {Name: eventObj["actor"].name}
       }).then((actor) => {
-        console.log(actor);
         if(actor === null)
           context.models.Actors.findOrCreate({
             where: {Name: "anonymous"},
