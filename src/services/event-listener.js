@@ -17,23 +17,16 @@ exports.sendToDatabase = function(eventObj, context){
         event.save();
       });
 
-      context.models.Actors.findOrCreate({
-        where: {Name: eventObj["actor"].name},
-        defaults: "anonymous"
-      }).spread((actor, create) => {
-        event.setDataValue("ActorId", actor.getDataValue("Id"));
-        event.save();
-      });
-
       context.models.Actors.findOne({
         where: {Name: eventObj["actor"].name}
       }).then((actor) => {
+        console.log(actor);
         if(actor === null)
           context.models.Actors.findOrCreate({
             where: {Name: "anonymous"},
             defaults: "anonymous"
           }).spread((anonymous, creadted) => {
-            event.setDataValue("ActorId", actor.getDataValue("Id"));
+            event.setDataValue("ActorId", anonymous.getDataValue("Id"));
             event.save();
           })
       });
