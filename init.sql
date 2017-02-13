@@ -27,7 +27,7 @@ create table Requests(
 create table Tags(
 	Id int not null auto_increment,
     Name varchar(255),
-    
+
     primary key(Id)
 );
 
@@ -36,8 +36,9 @@ create table Repositories(
     Name varchar(255),
     Description varchar(10000),
     Note varchar(10000),
-	TagId int,
-    
+		Active boolean,
+		TagId int,
+
     primary key(Id),
     foreign key(TagId) references Tags(Id)
 );
