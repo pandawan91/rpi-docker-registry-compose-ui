@@ -36,10 +36,18 @@ create table Repositories(
     Name varchar(255),
     Description varchar(10000),
     Note varchar(10000),
-		Active boolean,
-		TagId int,
+	Active boolean,
 
+    primary key(Id)
+);
+
+create table Repositories_Tags(
+	Id int not null auto_increment,
+    RepositoryId int,
+    TagId int,
+    
     primary key(Id),
+    foreign key(RepositoryId) references Repositories(Id),
     foreign key(TagId) references Tags(Id)
 );
 

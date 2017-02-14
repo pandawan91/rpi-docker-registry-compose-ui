@@ -20,7 +20,8 @@ exports.create = function(connectionString, username, password) {
       repositories: models.repositories.create(context),
       targets: models.targets.create(context),
       sources: models.sources.create(context),
-      dockerEvents: models.dockerEvents.create(context)
+      dockerEvents: models.dockerEvents.create(context),
+      repositories_tags: models.repositories_tags.create(context)
     };
   setForeignKeys(contextModels);
 
@@ -90,6 +91,13 @@ var setForeignKeys = function(contextModels) {
   });
   contextModels.repositories.belongsTo(contextModels.tags,{
     foreignKey: "TagId"
+  });
+
+  contextModels.tags.belongsToMany(contextModels.repositories,{
+    through: contextModels.repositories_tags
+  });
+  contextModels.repositories.belongsToMany(contextModels.tags,{
+    through: contextModels.repositories_tags
   });
 }
 

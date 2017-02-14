@@ -45,10 +45,17 @@ exports.sendToDatabase = function(eventObj, context){
           where: {Name: eventObj["target"].repository},
           defaults: {
             Name: eventObj["target"].repository,
-            Active: true,
-            TagId: tag.getDataValue("Id")
+            Active: true
           }
         }).spread((repo, created) => {
+          context.models.Repositories.hasTags(
+            tag
+          ).then((exists) => {
+            if(!exists){
+              context.models.Repositories.addTags(tag);
+            }
+          });
+
           event.setDataValue(
             "RepositoryId",
             repo.getDataValue("Id"));

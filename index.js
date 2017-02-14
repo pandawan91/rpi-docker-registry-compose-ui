@@ -18,7 +18,7 @@ app.use(bodyParser.json({
   type: 'application/vnd.docker.distribution.events.v1+json'
 }));
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://registry:8080");
+  res.header("Access-Control-Allow-Origin", "http://localhost:8080/");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -33,8 +33,6 @@ app.get("/repositories", (req, res) => {
   context.models.Repositories.findAll({
     include: [
       {model: context.models.Tags, required: true}
-      //context.models.Actions,
-      // context.models.Repository
     ]
   }).then((repo) => {
     res.send(repo);
