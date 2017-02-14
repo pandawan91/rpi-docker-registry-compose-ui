@@ -86,13 +86,6 @@ var setForeignKeys = function(contextModels) {
     foreignKey: "RepositoryId"
   });
 
-  contextModels.tags.hasMany(contextModels.repositories,{
-    foreignKey: "TagId"
-  });
-  contextModels.repositories.belongsTo(contextModels.tags,{
-    foreignKey: "TagId"
-  });
-
   contextModels.tags.belongsToMany(contextModels.repositories,{
     through: contextModels.repositories_tags
   });
