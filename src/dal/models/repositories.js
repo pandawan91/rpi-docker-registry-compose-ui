@@ -19,10 +19,7 @@ exports.create = function(context) {
     },
     Active: {
       type: sequelize.BOOLEAN
-    },
-    TagId: {
-      type: sequelize.INTEGER
-    },
+    }
   }, {
     timestamps: false,
     freezeTableName: true
