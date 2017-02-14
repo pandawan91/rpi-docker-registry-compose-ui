@@ -17,6 +17,11 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({
   type: 'application/vnd.docker.distribution.events.v1+json'
 }));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.post("/", function(req, res) {
   for(var index in req.body.events)
@@ -24,15 +29,15 @@ app.post("/", function(req, res) {
   res.send("OK");
 });
 
-app.get("/", (req, res) => {
-  context.models.DockerEvents.findAll({
+app.get("/repositories", (req, res) => {
+  context.models.Repositories.findAll({
     include: [
-      {model: context.models.Actors, required: true},
-      context.models.Actions,
+      {model: context.models.Tags, required: true}
+      //context.models.Actions,
       // context.models.Repository
     ]
-  }).then((events) => {
-    res.send(events);
+  }).then((repo) => {
+    res.send(repo);
   });
 });
 
