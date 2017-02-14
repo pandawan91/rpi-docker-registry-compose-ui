@@ -48,11 +48,11 @@ exports.sendToDatabase = function(eventObj, context){
             Active: true
           }
         }).spread((repo, created) => {
-          context.models.Repositories.hasTags(
+          context.models.Repositories.hasTag(
             tag
           ).then((exists) => {
             if(!exists){
-              context.models.Repositories.addTags(tag);
+              context.models.Repositories.addTag(tag);
             }
           });
 
