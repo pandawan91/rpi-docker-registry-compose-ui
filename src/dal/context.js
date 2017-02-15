@@ -87,13 +87,16 @@ var setForeignKeys = function(contextModels) {
   });
 
   contextModels.tags.belongsToMany(contextModels.repositories,{
-    through: contextModels.repositories_tags
+    through: contextModels.repositories_tags,
+    as: "Tag",
+    foreignKey: "TagId"
   });
   contextModels.repositories.belongsToMany(contextModels.tags,{
-    through: contextModels.repositories_tags
+    through: contextModels.repositories_tags,
+    as: "Repository",
+    foreignKey: "RepositoryId"
   });
 }
-
 exports.test = function() {
   return sequelize;
 }
