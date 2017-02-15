@@ -48,7 +48,7 @@ exports.sendToDatabase = function(eventObj, context){
             Active: true
           }
         }).spread((repo, created) => {
-          context.models.Repositories-Tags.findOrCreate({
+          context.models.Repositories_Tags.findOrCreate({
             where: {
               TagId: tag.Id,
               RepositoryId: repo.Id
