@@ -31,9 +31,6 @@ app.post("/", function(req, res) {
 
 app.get("/repositories", (req, res) => {
   context.models.Repositories.findAll({
-    include: [
-      {model: context.models.Tags, required: true}
-    ]
   }).then((repo) => {
     res.send(repo);
   });
