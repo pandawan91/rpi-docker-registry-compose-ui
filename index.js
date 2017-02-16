@@ -36,6 +36,18 @@ app.get("/repositories", (req, res) => {
   });
 });
 
-app.listen("8080", function() {
+app.get("/tags", (req, res) => {
+  context.query("SELECT Tags.Name FROM DockerRegistry.Tags AS Tags " +
+    "INNER JOIN DockerRegistry.Repositories_Tags AS Repo_Tags " +
+    "ON Tags.Id = Repo_Tags.TagId " +
+    "INNER JOIN DockerRegistry.Repositories AS Repos " +
+    "ON Repo_Tags.RepositoryId = Repos.Id " +
+    "WHERE Repos.Name = ?", { replacements: [req.query.repositoryname], type: sequelize.QueryTypes.SELECT
+  }).then((tagNames) => {
+    res.send(tagNames);
+  });
+});
+
+app.listen("8081", function() {
   console.log("service ready !!");
 });

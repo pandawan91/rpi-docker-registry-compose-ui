@@ -97,6 +97,7 @@ var setForeignKeys = function(contextModels) {
     foreignKey: "RepositoryId"
   });
 }
+
 exports.test = function() {
   return sequelize;
 }

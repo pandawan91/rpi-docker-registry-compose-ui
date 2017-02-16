@@ -7,6 +7,12 @@ exports.create = function(context) {
       primaryKey: true,
       autoIncrement: true,
       allowNull: false
+    },
+    RepositoryId: {
+      type: sequelize.INTEGER,
+    },
+    TagId: {
+      type: sequelize.INTEGER,
     }
   }, {
     timestamps: false,
