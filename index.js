@@ -52,12 +52,22 @@ app.get("/tags", (req, res) => {
     "ON Tags.Id = Repo_Tags.TagId " +
     "INNER JOIN DockerRegistry.Repositories AS Repos " +
     "ON Repo_Tags.RepositoryId = Repos.Id " +
-    "WHERE Repos.Name = ?", { replacements: [req.query.repositoryname], type: sequelize.QueryTypes.SELECT
+    "WHERE Repos.Name = ?", { replacements: [req.query.repositoryname], type: context.QueryTypes.SELECT
   }).then((tagNames) => {
     res.send(tagNames);
   });
 });
 
-app.listen("8080", function() {
+app.get("/events", (req, res) => {
+  context.query("SELECT DockerEvents.Stamp, Actions.Name FROM DockerEvents " +
+  "INNER JOIN Actions ON DockerEvents.ActionId = Actions.Id " +
+  "INNER JOIN Repositories ON DockerEvents.RepositoryId = Repositories.Id " +
+  "WHERE Repositories.Name = ?", { replacements: [req.query.repositoryname], type: context.QueryTypes.SELECT
+  }).then((result) => {
+    res.send(result);
+  });
+});
+
+app.listen("8081", function() {
   console.log("service ready !!");
 });
