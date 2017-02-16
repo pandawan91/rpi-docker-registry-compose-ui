@@ -30,10 +30,20 @@ app.post("/", function(req, res) {
 });
 
 app.get("/repositories", (req, res) => {
-  context.models.Repositories.findAll({
-  }).then((repo) => {
-    res.send(repo);
-  });
+  if(req.query.repositoryname)
+    context.models.Repositories.findOne({
+      where: {
+        Name: req.query.repositoryname
+      }
+    }).then((repo) => {
+      res.send(repo);
+    });
+  else {
+    context.models.Repositories.findAll({
+    }).then((repo) => {
+      res.send(repo);
+    });
+  }
 });
 
 app.get("/tags", (req, res) => {
